@@ -11,7 +11,7 @@ def printData(data):
     phoneBook = []
     splitLine = "=" * 49
     print(splitLine)
-    print(" №  Lastname        Name          Phone Numbers")
+    print(" №  Фамилия        Имя          Номер")
     print(splitLine)
     personID = 1
 
@@ -40,7 +40,7 @@ def showContacts(fileName):
     with open(fileName, "r", encoding="UTF-8") as file:
         data = sorted(file.readlines())
         printData(data)
-    input("\n--- press any key ---")
+    input("\n--- нажмите любую кнопку ---")
 
 
 # добавление нового контакта
@@ -48,18 +48,18 @@ def addContact(fileName):
     os.system("cls")
     with open(fileName, "a", encoding="UTF-8") as file:
         res = ""
-        res += input("Input a Surname of Contact: ") + ","
-        res += input("Input a Name of Contact: ") + ","
-        res += input("Input a Phone Number of Contact: ")
+        res += input("Фамилия: ") + ","
+        res += input("Имя: ") + ","
+        res += input("Телефонный номер: ")
 
         file.write(res + "\n")
 
-    input("\nContact was successfully added!\n--- press any key ---")
+    input("\nКонтакт добавлен!\n--- нажмите любую кнопку ---")
 
 # поиск контактов
 def findContact(fileName):  
     os.system("cls")
-    target = input("Input Item of Contact for searching: ")
+    target = input("Введите данные для поиска: ")
     result = []
     with open(fileName, "r", encoding="UTF-8") as file:
         data = file.readlines()
@@ -71,9 +71,9 @@ def findContact(fileName):
     if len(result) != 0:
         printData(result)
     else:
-        print(f"There is no Contact with this Item '{target}'.")
+        print(f"Нет такого контакта '{target}'.")
 
-    input("--- press any key ---")
+    input("--- нажмите любую кнопку ---")
 
 # изменение информации в контакте
 def changeContact(fileName):  
@@ -84,20 +84,20 @@ def changeContact(fileName):
         printData(data)
 
         numberContact = int(
-            input("Input Number of Contact for changing or 0 for return Main Menu: ")
+            input("Введите номер контакта для изменения или 0 для возврата в меню: ")
         )
         print(data[numberContact - 1].rstrip().split(","))
         if numberContact != 0:
-            newLastName = input("Input new Lastname: ")
-            newName = input("Input new Name: ")
-            newPhone = input("Input new Phone: ")
+            newLastName = input("Новая фамилия: ")
+            newName = input("Новое имя: ")
+            newPhone = input("Новый номер: ")
             data[numberContact - 1] = (
                 newLastName + "," + newName + "," + newPhone + "\n"
             )
             with open(fileName, "w", encoding="UTF-8") as file:
                 file.write("".join(data))
-                print("\nContact was successfully changed!")
-                input("\n--- press any key ---")
+                print("\nКонтакт изменен!")
+                input("\n--- нажмите любую кнопку ---")
         else:
             return
 
@@ -109,10 +109,10 @@ def deleteContact(fileName):
         printData(data)
 
         numberContact = int(
-            input("Input Number of Contact for deleting or 0 for return Main Menu: ")
+            input("Введите номер контакта для его удаления или 0 для возврата в меню: ")
         )
         if numberContact != 0:
-            print(f"Deleting record: {data[numberContact-1].rstrip().split(',')}\n")
+            print(f"Запись об удалении: {data[numberContact-1].rstrip().split(',')}\n")
             data.pop(numberContact - 1)
             with open(fileName, "w", encoding="UTF-8") as file:
                 file.write("".join(data))
@@ -120,18 +120,18 @@ def deleteContact(fileName):
         else:
             return
 
-    input("--- press any key ---")
+    input("--- нажмите любую кнопку ---")
 
 # отрисовка интерфейса главного меню
 def drawInterface():  
-    print("#####   PHONE BOOK   #####")
+    print("#####   ТЕЛЕФОННЫЙ СПРАВОЧНИК   #####")
     print("=" * 26)
-    print(" [1] -- Show Contacts")
-    print(" [2] -- Add Contacts")
-    print(" [3] -- Find Contacts")
-    print(" [4] -- Change Contacts")
-    print(" [5] -- Delete Contacts")
-    print("\n [0] -- Exit")
+    print(" [1] -- Показать контакты")
+    print(" [2] -- Добавить контакт")
+    print(" [3] -- Найти контакт")
+    print(" [4] -- Изменить контакт")
+    print(" [5] -- Удалить контакт")
+    print("\n [0] -- Выход")
     print("=" * 26)
 
 # реализация главного меню
@@ -139,7 +139,7 @@ def main(file_name):
     while True:
         os.system("cls")
         drawInterface()
-        userChoice = int(input("Input a Number for 1 to 5 or 0 for Exit: "))
+        userChoice = int(input("Введите значение от 1 до 5 или 0 для выхода: "))
 
         if userChoice == 1:
             showContacts(file_name)
@@ -152,7 +152,7 @@ def main(file_name):
         elif userChoice == 5:
             deleteContact(file_name)
         elif userChoice == 0:
-            print("Thank you!")
+            print("Спасибо")
             return
 
 
