@@ -79,3 +79,38 @@ def menu():
     [print(f'\t{i}. {item}') for i, item in enumerate(menu_points, 1)]
     choice = int(input('Выберите пункт: '))
     return choice
+
+
+
+while True:
+    choice = menu()
+    match choice:
+        case 1:
+            open_file(phone_book)
+            print('\Телефонная книга успешно открыта!\n')
+        case 2:
+            save_file(phone_book)
+            print(f'\nТелефонная книга успешно сохранена!\n')
+        case 3:
+            show_contacts(phone_book, 'Телефонная книга пуста или не открыта')
+        case 4:
+            new = []
+            for item in ['Введите имя: ', 'Введите номер: ', 'Введите комент: ']:
+                new.append(input(item))
+            add_new_contact(phone_book, new)
+            print(f'\nКонтакт {new[0]} успешно добавлен!\n')
+        case 5:
+            func_search(phone_book)
+        case 6:
+            func_search(phone_book)
+            select = int(input('Какой контакт будем изменять? '))
+            name = change_contact(phone_book, select)
+            print(f'\nКонтакт {name} успешно изменён!\n')
+        case 7:
+            func_search(phone_book)
+            select = int(input('Какой контакт будем удалять? '))
+            name = delete_contact(phone_book, select)
+            print(f'\nКонтакт {name} успешно удалён!\n')
+        case 8:
+            print('\nВсего хорошего!')
+            break
