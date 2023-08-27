@@ -42,3 +42,40 @@ def find_contact(book: dict, search: str):
                 resault[i] = contact
                 break
     return resault
+
+
+def func_search(book: dict):
+    search = input('Что будем искать? ')
+    resault = find_contact(phone_book, search)
+    show_contacts(resault, f'Контакт содержащий {search} не найден!')
+
+
+def change_contact(book: dict, cid: int):
+    name, phone, comment = book.get(cid)
+    ch = []
+    for item in ['Введите новое имя (или оставьте пустым чтобы не изменять): ',
+                 'Введите новый телефон (или оставьте пустым чтобы не изменять):',
+                 'Введите новый комментарий (или оставьте пустым чтобы не изменять):']:
+        ch.append(input(item))
+    book[cid] = [ch[0] if ch[0] else name, ch[1] if ch[1] else phone, ch[2] if ch[2] else comment]
+    return ch[0] if ch[0] else name
+
+
+def delete_contact(book: dict, cid: int):
+    name = book.pop(cid)
+    return name[0]
+
+
+def menu():
+    menu_points = ['Открыть файл',
+                   'Сохронить файл',
+                   'Посмотреть все контакты',
+                   'Добавить контакты',
+                   'Найти контакт',
+                   'Изменить контакт',
+                   'Удалить контакт',
+                   'Выход']
+    print('Главное меню')
+    [print(f'\t{i}. {item}') for i, item in enumerate(menu_points, 1)]
+    choice = int(input('Выберите пункт: '))
+    return choice
